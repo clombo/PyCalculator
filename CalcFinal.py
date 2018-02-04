@@ -75,9 +75,15 @@ def Equal():
     global currentCalc
     global prevCalc
 
+    #Make sure last character is not a operator
+    if operator[-1:] in ['+','-','*','/']:
+        operator = operator[:-1]
+
+    #Reset clicks
     clicks = 0
     prevCalc = currentCalc
 
+    #Run calculation only against current or against current and previous
     if operator[:1] in ['+','-','*','/']:
         if operator[:1] == '+':
             currentCalc = prevCalc + Calculator(operator[1:])
@@ -90,6 +96,7 @@ def Equal():
     else:
         currentCalc = Calculator(operator)
 
+    #Set values to display
     operator = str(currentCalc.tot)
     text_input.set(operator)
 
